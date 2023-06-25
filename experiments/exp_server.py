@@ -13,7 +13,7 @@ async def server(websocket, path):
         await websocket.send(f"Server received: {message}")
 
 # Start the server
-start_server = websockets.serve(server, "localhost", PORT)
+start_server = websockets.serve(server, "0.0.0.0", PORT)
 
 # Run the event loop
 asyncio.get_event_loop().run_until_complete(start_server)
