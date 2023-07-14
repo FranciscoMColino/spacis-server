@@ -19,7 +19,8 @@ class WsMessageDispatcher:
                     await self.client.websocket.send(message)
                     #await asyncio.sleep(ON_DISPATCH_INTERVAL)
                     continue
-            #await asyncio.sleep(NO_ACTIVITY_INTERVAL)
+            else:
+                await asyncio.sleep(NO_ACTIVITY_INTERVAL)
 
     def add_message(self, message):
         self.message_buffer.append(message)
