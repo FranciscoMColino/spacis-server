@@ -64,7 +64,7 @@ class WsServer:
                     print('LOG: Sound Station connected')
                 elif message == 'ground-control-station-connect' and self.gcs_client.connected and self.gcs_client.websocket is not None and self.gcs_client.websocket.open:
                     print('LOG: Ground Control Station already connected')
-                elif message == 'ground-control-station-connect' and not self.gcs_client.connected:
+                elif message == 'ground-control-station-connect':
                     self.gcs_client.websocket = websocket
                     self.gcs_client.connected = True
                     print('LOG: Ground Control Station connected')
