@@ -55,18 +55,19 @@ class WsServer:
                 # Connection handler
 
                 # TODO better handshake
-                if message == 'sound-station-connect' and not self.ss_client.connected:
+                
+                if message == 'sound-station-connect' and self.ss_client.connected and self.ss_client.websocket is not None and self.ss_client.websocket.open:
+                    print('LOG: Sound Station already connected')
+                elif message == 'sound-station-connect':
                     self.ss_client.websocket = websocket
                     self.ss_client.connected = True
                     print('LOG: Sound Station connected')
-                elif message == 'sound-station-connect' and self.ss_client.connected and self.ss_client.websocket is not None and self.ss_client.websocket.open:
-                    print('LOG: Sound Station already connected')
+                elif message == 'ground-control-station-connect' and self.gcs_client.connected and self.gcs_client.websocket is not None and self.gcs_client.websocket.open:
+                    print('LOG: Ground Control Station already connected')
                 elif message == 'ground-control-station-connect' and not self.gcs_client.connected:
                     self.gcs_client.websocket = websocket
                     self.gcs_client.connected = True
                     print('LOG: Ground Control Station connected')
-                elif message == 'ground-control-station-connect' and self.gcs_client.connected and self.gcs_client.websocket is not None and self.gcs_client.websocket.open:
-                    print('LOG: Ground Control Station already connected')
                 else:
                     self.received_message_handler(message)
         except Exception as e:
