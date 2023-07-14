@@ -21,7 +21,7 @@ class WsServer:
         self.gcs_client = Client()
         self.ss_msg_dispatch = ws_message_dispatcher.WsMessageDispatcher(self.ss_client)
         #self.gcs_msg_dispatch = ws_message_dispatcher.WsMessageDispatcher(self.gcs_client)
-        self.relay_message_types = ["sensor_data", "gps_status"]
+        self.relay_message_types = ["sensor_data", "gps_data"]
 
     async def start(self):
         self.server = await websockets.serve(self.handler, WS_HOST, WS_PORT)
