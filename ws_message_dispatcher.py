@@ -17,7 +17,7 @@ class WsMessageDispatcher:
                 if len(self.message_buffer) > 0:
                     message = self.message_buffer.pop(0)
                     print("LOG: dispatching message: {}".format(message))
-                    await self.client.websocket.send(json.dump(message))
+                    await self.client.websocket.send(json.dumps(message))
                     #await asyncio.sleep(ON_DISPATCH_INTERVAL)
                     continue
             else:
