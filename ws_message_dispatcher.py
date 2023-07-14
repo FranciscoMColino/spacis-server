@@ -10,12 +10,16 @@ class WsMessageDispatcher:
     
     async def periodic_dispatch(self):
         while True:
+            print("LOG: periodic dispatch")
             if self.client.connected and self.client.websocket.open:
+                
                 if len(self.message_buffer) > 0:
-                    await self.client.websocket.send(self.message_buffer.pop(0))
-                    await asyncio.sleep(ON_DISPATCH_INTERVAL)
+                    message = self.message_buffer.pop(0)
+                    print("LOG: dispatching message: {}".format(message))
+                    await self.client.websocket.send(message)
+                    #await asyncio.sleep(ON_DISPATCH_INTERVAL)
                     continue
-            await asyncio.sleep(NO_ACTIVITY_INTERVAL)
+            #await asyncio.sleep(NO_ACTIVITY_INTERVAL)
 
     def add_message(self, message):
         self.message_buffer.append(message)

@@ -25,6 +25,7 @@ class WsServer:
 
     async def start(self):
         self.server = await websockets.serve(self.handler, WS_HOST, WS_PORT)
+        print("LOG: Server started")
         asyncio.create_task(self.ss_msg_dispatch.periodic_dispatch())
     
     def received_message_handler(self, message):
