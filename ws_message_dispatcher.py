@@ -22,6 +22,7 @@ class WsMessageDispatcher:
                     continue
             else:
                 await asyncio.sleep(NO_ACTIVITY_INTERVAL)
+                print("LOG: WebSocket not connected, {}".format(self.client.websocket.open if self.client.websocket is not None else "None"))
 
     def add_message(self, message):
         self.message_buffer.append(message)
