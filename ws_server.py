@@ -6,7 +6,7 @@ import websockets
 import ws_message_dispatcher
 
 WS_PORT = 8765
-WS_HOST = 'localhost'
+WS_HOST = '172.31.1.110'
 
 class Client:
     def __init__(self):

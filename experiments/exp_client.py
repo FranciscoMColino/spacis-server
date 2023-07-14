@@ -3,7 +3,7 @@ import asyncio
 import websockets
 
 PORT = 8765
-HOST = "16.171.4.184"
+HOST = "100.121.193.123"
 
 async def client():
     server_address = "ws://" + HOST + ":" + str(PORT)

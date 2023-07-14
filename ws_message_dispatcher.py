@@ -1,7 +1,7 @@
 import asyncio
 
-ON_DISPATCH_INTERVAL = 1/10
-NO_ACTIVITY_INTERVAL = 1
+ON_DISPATCH_INTERVAL = 1/100
+NO_ACTIVITY_INTERVAL = 1/5
 
 class WsMessageDispatcher:
     def __init__(self, client):
