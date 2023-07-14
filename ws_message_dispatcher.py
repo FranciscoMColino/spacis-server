@@ -20,7 +20,8 @@ class WsMessageDispatcher:
                     print("LOG: {} messages in buffer".format(len(self.message_buffer)))
                     await self.client.websocket.send(json.dumps(message))
                     #await asyncio.sleep(ON_DISPATCH_INTERVAL)
-                    continue
+                else:
+                    await asyncio.sleep(NO_ACTIVITY_INTERVAL)
             else:
                 await asyncio.sleep(NO_ACTIVITY_INTERVAL)
                 print("LOG: WebSocket not connected, {}".format(self.client.websocket.open if self.client.websocket is not None else "None"))
