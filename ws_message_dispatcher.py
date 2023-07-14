@@ -10,7 +10,7 @@ class WsMessageDispatcher:
     
     async def periodic_dispatch(self):
         while True:
-            print("LOG: periodic dispatch")
+            #print("LOG: periodic dispatch")
             if self.client.connected and self.client.websocket.open:
                 
                 if len(self.message_buffer) > 0:
