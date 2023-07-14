@@ -21,6 +21,7 @@ class WsServer:
         self.gcs_client = Client()
         self.ss_msg_dispatch = ws_message_dispatcher.WsMessageDispatcher(self.ss_client)
         #self.gcs_msg_dispatch = ws_message_dispatcher.WsMessageDispatcher(self.gcs_client)
+        self.relay_message_types = ["sensor_data", "gps_status"]
 
     async def start(self):
         self.server = await websockets.serve(self.handler, WS_HOST, WS_PORT)
@@ -32,13 +33,13 @@ class WsServer:
 
             if message["user"] == "ground-control-station":
                 content = message["content"]
-                if content["type"] == "sensor_data" or content["type"] == "gps_status":
-                    print("RECEIVED: message from sound station")
+                if content["type"] in self.relay_message_types:
+                    print("RECEIVED: message from ground control station, type {}".format(content["type"]))
                     self.ss_msg_dispatch.add_message(message)
                 else:
-                    print("RECEIVED: invalid message type from sound station")
+                    print("RECEIVED: invalid message type from ground control station, type {}".format(content["type"]))
             elif message["user"] == "sound-station":
-                pass
+                print("RECEIVED: message from sound station")
             else:
                 print("RECEIVED: invalid user")
 
