@@ -35,7 +35,8 @@ class WsServer:
                 content = message["content"]
                 if content["type"] in self.relay_message_types:
                     print("RECEIVED: message from ground control station, type {}".format(content["type"]))
-                    self.ss_msg_dispatch.add_message(content)
+                    if self.ss_client.websocket is not None and self.ss_client.websocket.open:
+                        self.ss_msg_dispatch.add_message(content)
                 else:
                     print("RECEIVED: invalid message type from ground control station, type {}".format(content["type"]))
             elif message["user"] == "sound-station":
