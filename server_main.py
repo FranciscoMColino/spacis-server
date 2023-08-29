@@ -10,7 +10,7 @@ async def main():
 
     settings = parse_settings()
 
-    server = WsServer()
+    server = WsServer(settings)
 
     await server.start()
 
