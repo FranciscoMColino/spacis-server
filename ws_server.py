@@ -5,8 +5,6 @@ import websockets
 
 import ws_message_dispatcher
 
-WS_PORT = 8765
-WS_HOST = '172.31.1.110'
 
 class Client:
     def __init__(self):
@@ -15,7 +13,8 @@ class Client:
         self.websocket = None
 
 class WsServer:
-    def __init__(self):
+    def __init__(self, settings):
+        self.settings = settings
         self.server = None
         self.ss_client = Client()
         self.gcs_client = Client()
@@ -24,7 +23,7 @@ class WsServer:
         self.relay_message_types = ["sensor_data", "gps_data"]
 
     async def start(self):
-        self.server = await websockets.serve(self.handler, WS_HOST, WS_PORT)
+        self.server = await websockets.serve(self.handler, self.settings["cloud_server_ip"], self.settings["cloud_server_port"])
         print("LOG: Server started")
         asyncio.create_task(self.ss_msg_dispatch.periodic_dispatch())
     

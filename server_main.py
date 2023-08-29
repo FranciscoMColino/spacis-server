@@ -2,12 +2,15 @@ import asyncio
 
 import websockets
 
-import ws_server
+from spacis_utils import parse_settings
+from ws_server import WsServer
 
 
 async def main():
 
-    server = ws_server.WsServer()
+    settings = parse_settings()
+
+    server = WsServer()
 
     await server.start()
 
