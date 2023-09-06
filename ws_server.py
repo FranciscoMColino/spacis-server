@@ -46,6 +46,12 @@ class WsServer:
 
         except json.decoder.JSONDecodeError:
             print("RECEIVED: invalid message format (not JSON)")
+        
+        except KeyError:
+            print("RECEIVED: invalid message format (missing key)")
+
+        except Exception as e:
+            print("RECEIVED: error handling message: {}".format(e))
 
 
     async def handler(self, websocket):
